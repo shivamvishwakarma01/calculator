@@ -44,9 +44,14 @@ body{
 .text{
     width: 320px;
     height: 80px;
+    color: black;
+    font-size: larger;
     background-color:beige;
     border-radius: 5%;
     border-color:2px black;
 }
 .ope{
     background-color: #97B067;}
+.eq{
+    background-color: rgb(184, 122, 8);
+}
