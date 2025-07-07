@@ -1,57 +1,45 @@
-const k=document.body.querySelector('.text');
-const l=document.body.querySelectorAll('.q');
-const c= document.getElementById('opec');
-const p=document.getElementsByClassName('btnp');
-console.log(p);
+let display = document.querySelector('.text');  
+let buttons = document.querySelectorAll('.btn');
+let string = "";
+display.style.color = "black";
 
-function dig(){
-    l.forEach((val)=>{
-    val.onclick=()=>{
-     k.innerHTML= k.innerHTML+val.innerHTML;
-     num=k.innerHTML;
-     clear();
-     sum();
-     return;
-    }
-    
-})}
-const clear=()=>{
-    c.onclick=()=>{
-        k.innerHTML=" ";
-    }
-    return;
-}
-const sum=()=>{
-    p.onclick=()=>{
-        k.innerHTML= dig()+dig();
+buttons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        let buttonText = e.target.textContent;  
+        
+        if (buttonText === '=') {
+            string = eval(string);
+            display.textContent = string; 
+            display.style.fontSize = "24px";
+            display.style.color = "green";
 
-    }
-    return ;
-}
-function calculateAllOperations(a, b) {
-  // Sum
-  const sum = a + b;
-  
-  // Difference (absolute value to always get positive difference)
-  const difference = Math.abs(a - b);
-  
-  // Multiplication
-  const product = a * b;
-  
-  // Division (with check for division by zero)
-  let quotient;
-  if (b !== 0) {
-    quotient = a / b;
-  } else {
-    quotient = "Cannot divide by zero";
-  }
-  
-  // Return all results as an object
-  return {
-    sum: sum,
-    difference: difference,
-    product: product,
-    quotient: quotient
-  };
-}
-calculateAllOperations(dig(),dig());
+             buttons.forEach(btn => {
+                if(btn.textContent !='AC'){
+                btn.disabled = true;
+                btn.style.opacity = "0.6"; }
+            });
+        }
+        else if (buttonText === 'AC') {
+            string = "";
+            display.textContent = string;
+            display.style.color = "black";
+            display.style.fontSize = "18px";
+            buttons.forEach(btn=>{
+             btn.disabled = false;
+             btn.style.opacity = "1"; 
+            });
+
+
+        }
+        else if (buttonText === 'Del') {
+            string = string.substring(0, string.length - 1);
+            display.textContent = string;
+        }
+        else {
+            string += buttonText;
+            display.textContent = string;
+            display.style.fontSize = "18px";
+            display.style.color = "black";
+        }
+    });
+})
